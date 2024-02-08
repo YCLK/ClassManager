@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>랜덤 번호 추첨기 - 클래스매니저</title>
-    <script src="main.js"></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>숫자 추첨기</h1>
 
-    <label for="inputNumber">추첨할 숫자 범위를 입력하세요:</label>
-    <input type="number" id="inputNumber" min="1" placeholder="숫자를 입력하세요">
+    <label for="inputNumber">전체 학생 수를 입력해 주세요:</label>
+    <input type="number" id="inputNumber" min="1" placeholder="학생의 가장 마지막 번호를 입력하세요">
     <button onclick="randomPick()">추첨하기</button>
 
     <p id="result"></p>
@@ -20,7 +18,7 @@
       // 입력한 숫자 범위를 가져오기
       let inputNumber = document.getElementById('inputNumber').value;
 
-      // 유효한 숫자인지 확인, 공백이거나 NaN일 때 올바른 숫자를 입력하세요 출력
+      // 유효한 숫자인지 확인, 공백이거나 NaN, 음수일 때 '올바른 숫자를 입력해 주세요!' 출력
       if (inputNumber === '' || isNaN(inputNumber)) {
           alert('올바른 숫자를 입력해 주세요!');
           return;
