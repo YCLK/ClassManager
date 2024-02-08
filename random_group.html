@@ -1,55 +1,71 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>랜덤 모둠 추첨 - 교실 관리 시스템</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        h2 {
-            color: #333;
-        }
-        p {
-            color: #666;
-        }
-        form {
-            text-align: center;
-            margin-top: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>랜덤 그룹 생성기</title>
+  <script src="main.js"></script>
 </head>
 <body>
-    <header>
-        <h1>랜덤 모둠 추첨</h1>
-        <p>랜덤으로 모둠을 추첨하여 사용하세요.</p>
-    </header>
-
-    <form>
-        <label for="numberOfGroups">추첨할 모둠 개수:</label>
-        <input type="number" id="numberOfGroups" name="numberOfGroups" min="1" value="1" required>
-        <button type="submit">모둠 추첨 시작</button>
-    </form>
-
-    <div id="result"></div>
-    <!-- 추첨 결과를 여기에 표시할 수 있습니다. -->
+  <h2>랜덤 그룹 생성기</h2>
+  <label for="totalStudents">전체 학생 수:</label>
+  <input type="number" id="totalStudents" min="1" required>
+  <label for="groupSize">그룹당 인원 수:</label>
+  <input type="number" id="groupSize" min="1" required>
+  <button onclick="createRandomGroups()">그룹 생성</button>
+  <div id="result"></div>
+  <script>    
+    function createRandomGroups() {
+        const totalStudentsInput = document.getElementById('totalStudents');
+        const groupSizeInput = document.getElementById('groupSize');
+        const resultDiv = document.getElementById('result');
+    
+        const totalStudents = parseInt(totalStudentsInput.value);
+        const groupSize = parseInt(groupSizeInput.value);
+    
+        if (isNaN(totalStudents) || isNaN(groupSize) || totalStudents <= 0 || groupSize <= 0) {
+          alert('올바른 값을 입력하세요.');
+          return;
+        }
+    
+        const numGroups = Math.floor(totalStudents / groupSize);
+        const remainingStudents = totalStudents % groupSize;
+    
+        let students = Array.from({ length: totalStudents }, (_, index) => index + 1);
+        students = shuffleArray(students);
+    
+        let groups = [];
+    
+        for (let i = 0; i < numGroups; i++) {
+          const group = students.splice(0, groupSize);
+          groups.push(group);
+        }
+    
+        if (remainingStudents > 0) {
+          const remainingGroup = students.slice();
+          groups.push(remainingGroup);
+        }
+    
+        displayGroups(groups, resultDiv);
+      }
+    
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+    
+      function displayGroups(groups, resultDiv) {
+        resultDiv.innerHTML = '';
+    
+        groups.forEach((group, index) => {
+          const groupDiv = document.createElement('div');
+          groupDiv.innerHTML = `<strong>그룹 ${index + 1}:</strong> ${group.join(', ')}`;
+          resultDiv.appendChild(groupDiv);
+        });
+      }
+  </script>
 </body>
 </html>

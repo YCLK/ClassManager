@@ -1,69 +1,37 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>랜덤 번호 추첨 - 교실 관리 시스템</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        h2 {
-            color: #333;
-        }
-        p {
-            color: #666;
-        }
-        form {
-            text-align: center;
-            margin-top: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+    <title>랜덤 번호 추첨기 - 클래스매니저</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>랜덤 번호 추첨</h1>
-        <p>랜덤으로 번호를 추첨하여 사용하세요.</p>
-    </header>
+    <h1>숫자 추첨기</h1>
 
-    <form>
-        <label for="numberOfNumbers">추첨할 번호 개수:</label>
-        <input type="number" id="numberOfNumbers" name="numberOfNumbers" min="1" value="1" required>
-        <button type="submit">번호 추첨 시작</button>
-    </form>
+    <label for="inputNumber">추첨할 숫자 범위를 입력하세요:</label>
+    <input type="number" id="inputNumber" min="1" placeholder="숫자를 입력하세요">
+    <button onclick="randomPick()">추첨하기</button>
 
-    <div id="result"></div>
-    <!-- 추첨 결과를 여기에 표시할 수 있습니다. -->
-
+    <p id="result"></p>
     <script>
-        function performRandomNumberDraw() {
-            var numberOfNumbers = document.getElementById('numberOfNumbers').value;
-            var resultContainer = document.getElementById('result');
-            
-            var result = [];
-            for (var i = 0; i < numberOfNumbers; i++) {
-                result.push(Math.floor(Math.random() * 100) + 1);
-            }
-            
-            resultContainer.innerText = '추첨된 번호: ' + result.join(', ');
-        }
+      function randomPick() {
+      // 입력한 숫자 범위를 가져오기
+      let inputNumber = document.getElementById('inputNumber').value;
+
+      // 유효한 숫자인지 확인, 공백이거나 NaN일 때 올바른 숫자를 입력하세요 출력
+      if (inputNumber === '' || isNaN(inputNumber)) {
+          alert('올바른 숫자를 입력해 주세요!');
+          return;
+      }
+
+      // 추첨 결과 계산
+      let randomNumber = Math.floor(Math.random() * inputNumber) + 1;
+
+      // 결과를 HTML에 표시
+      document.getElementById('result').innerText = '추첨된 숫자: ' + randomNumber;
+      }
     </script>
 </body>
 </html>
