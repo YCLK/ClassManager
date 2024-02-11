@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +8,18 @@
 </head>
 <body>
   <h2>랜덤 그룹 생성기</h2>
+
   <label for="totalStudents">전체 학생 수:</label>
   <input type="number" id="totalStudents" min="1" required>
+
   <label for="groupSize">그룹당 인원 수:</label>
   <input type="number" id="groupSize" min="1" required>
+
   <button onclick="createRandomGroups()">그룹 생성</button>
-  <div id="result"></div>
-  <script>    
+
+  <p id="result"></p>
+  <script>
+    // 랜덤 그룹 만들기
     function createRandomGroups() {
         const totalStudentsInput = document.getElementById('totalStudents');
         const groupSizeInput = document.getElementById('groupSize');
@@ -24,7 +29,7 @@
         const groupSize = parseInt(groupSizeInput.value);
     
         if (isNaN(totalStudents) || isNaN(groupSize) || totalStudents <= 0 || groupSize <= 0) {
-          alert('올바른 값을 입력하세요.');
+          alert('올바른 숫자를 입력해 주세요!');
           return;
         }
     

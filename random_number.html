@@ -68,8 +68,8 @@
       // 입력한 숫자 범위를 가져오기
       let inputNumber = document.getElementById('inputNumber').value;
 
-      // 유효한 숫자인지 확인, 공백이거나 NaN, 음수일 때 '올바른 숫자를 입력해 주세요!' 출력
-      if (inputNumber === '' || isNaN(inputNumber)) {
+      // 유효한 숫자인지 확인, NaN/음수일 때 '올바른 숫자를 입력해 주세요!' 출력
+      if (isNaN(inputNumber) || inputNumber <=0) {
           alert('올바른 숫자를 입력해 주세요!');
           return;
       }
